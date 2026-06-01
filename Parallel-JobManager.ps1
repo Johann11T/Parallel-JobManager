@@ -85,11 +85,9 @@ function Drain-RunningQueues {
 function Flush-JobStreams {
     param([hashtable]$job)
 
-    foreach ($msg in $job.PS.Streams.Warning) { Write-Warning "[$($job.Label)] $msg" }
-    $job.PS.Streams.Warning.Clear()
+    foreach ($msg in $job.PS.Streams.Warning.ReadAll()) { Write-Warning "[$($job.Label)] $msg" }
 
-    foreach ($msg in $job.PS.Streams.Error) { Write-Host "[ERROR][$($job.Label)] $msg" -ForegroundColor Red }
-    $job.PS.Streams.Error.Clear()
+    foreach ($msg in $job.PS.Streams.Error.ReadAll()) { Write-Host "[ERROR][$($job.Label)] $msg" -ForegroundColor Red }
 }
 
 function Clear-CompletedJobs {
