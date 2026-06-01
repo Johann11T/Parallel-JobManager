@@ -85,7 +85,7 @@ function Drain-RunningQueues {
 function Flush-JobStreams {
     param([hashtable]$job)
 
-    foreach ($msg in $job.PS.Streams.Warning.ReadAll()) { Write-Warning "[$($job.Label)] $msg" }
+    foreach ($msg in $job.PS.Streams.Warning.ReadAll()) { Write-Host "[WARN][$($job.Label)] $msg" -ForegroundColor Yellow }
 
     foreach ($msg in $job.PS.Streams.Error.ReadAll()) { Write-Host "[ERROR][$($job.Label)] $msg" -ForegroundColor Red }
 }
